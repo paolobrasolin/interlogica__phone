@@ -1,5 +1,6 @@
-require "phawn/numbers_params_parser"
 require "minitest/autorun"
+
+require "phawn/numbers_params_parser"
 
 module TestNumbersParamsParser
   class ParametersPresence < Minitest::Test
