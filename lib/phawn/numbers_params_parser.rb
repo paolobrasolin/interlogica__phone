@@ -3,21 +3,8 @@
 require 'csv'
 
 module Phawn
-  module ParamsParser
-    def self.post_number(parameters)
-      errors = Hash.new { |h, k| h[k] = [] }
-
-      # Validate parameters presence
-
-      data = parameters.dig("data")
-      errors["data"] << "parameter is mandatory" if data.nil?
-
-      return nil, errors unless errors.each_value.all?(&:empty?)
-
-      return data, nil
-    end
-
-    def self.post_numbers(parameters)
+  module NumbersParamsParser
+    def self.run(parameters)
       errors = Hash.new { |h, k| h[k] = [] }
 
       # Validate parameters presence
