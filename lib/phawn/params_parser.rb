@@ -7,6 +7,8 @@ module Phawn
     def self.post_number(parameters)
       errors = Hash.new { |h, k| h[k] = [] }
 
+      # Validate parameters presence
+
       data = parameters.dig("data")
       errors["data"] << "parameter is mandatory" if data.nil?
 
@@ -17,6 +19,8 @@ module Phawn
 
     def self.post_numbers(parameters)
       errors = Hash.new { |h, k| h[k] = [] }
+
+      # Validate parameters presence
 
       headers = parameters.dig("headers")
       errors["headers"] << "parameter is mandatory" if headers.nil?
@@ -29,11 +33,15 @@ module Phawn
 
       return nil, errors unless errors.each_value.all?(&:empty?)
 
+      # Validate `headers` value
+
       headers = { "true" => true, "false" => false }[headers]
       if headers.nil?
         errors["headers"] << "allowed values: [true, false]"
         return nil, errors
       end
+
+      # Validate `data` value
 
       begin
         # TODO: handle filesystem errors
@@ -42,6 +50,8 @@ module Phawn
         errors["data"] << "the CSV file is malformed"
         return nil, errors
       end
+
+      # Validate `columns` value
 
       if headers
         columns = csv.headers
