@@ -60,3 +60,15 @@ curl localhost:9292/numbers -F 'data=@samples/headerfull.csv' -F 'headers=true' 
 curl localhost:9292/numbers -F 'data=@samples/headerless.csv' -F 'headers=false' -F 'column=1'
 # => {"status":"success","data":[...]}
 ```
+
+# Running tests
+
+This project uses `minitest`:
+
+```bash
+# To run the whole suite:
+ruby -Ilib:test test/test_phawn.rb
+
+# To run a specific test:
+ruby -Ilib:test test/phawn/test_XXX.rb
+```
